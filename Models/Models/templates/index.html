@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" href="{% static "CSS/Style.css" %}">
+        <title>Base</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        
+    </head>
+    <body>
+    
+    <h2>{{text_1}}</h2>
+    <table border="1px">
+    <tr>
+            <th>First Name</th>
+            <th>Last Name </th>
+            <th>Instrument</th>
+    
+    </tr>
+    {% for row in musician %}
+    <tr>
+    <td>{{ row.first_name}}</td>
+    <td>{{ row.last_name}}</td>
+    <td>{{ row.instrument}}</td>
+    
+    
+    </tr>
+    {% endfor %}
+    
+    
+    </table>
+
+<h1>{{text_2}}</h1>
+    <table border="1px">
+    <tr>
+            <th>Artis</th>
+            <th>Name</th>
+            <th>Release Date </th>
+            <th>Num_Stars</th>
+   </tr>
+   {% for row in album %}
+   <tr>
+   <td>{{ row.artis}}</td>
+   <td>{{ row.name}}</td>
+   <td>{{row.release_date}}</td>
+   <td>{{row.num_stars}}</td>
+   </tr>
+   {% endfor %}
+
+
+    
+    
+    </table>
+    
+       
+        <script src="" async defer></script>
+    </body>
+</html>
