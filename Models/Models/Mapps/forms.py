@@ -9,3 +9,20 @@ class user_form(forms.Form):
     widget=forms.TextInput(attrs={'type':'date'}))
 
     user_email=forms.EmailField(required=False,label="User Email")
+
+from typing import Any, Dict
+from django import forms
+from django.core import validators
+from Mapps import models
+
+
+class Musician_Form(forms.ModelForm):
+    class Meta:
+        model=models.Musician
+        fields=('first_name','last_name',)
+        fields="__all__"
+
+
+        
+
+        
