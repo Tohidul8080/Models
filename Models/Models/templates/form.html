@@ -31,3 +31,149 @@
         <script src="" async defer></script>
     </body>
 </html>
+
+#All model form ############################
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h3>{{heading_3}}</h3>
+        <a href="/">Add</a>
+        <form  method="POST">
+        {% csrf_token %}
+        {{test_form.as_p}}
+        <input type="submit" name="submit" value="Submit">
+        
+        
+        </form>
+        
+        
+
+        
+        <script src="" async defer></script>
+    </body>
+</html>
+
+
+
+<!--    views.py ################
+
+
+def form(request):
+    new_form=forms.user_form()
+    diction={'test_form':new_form,'heading_3':"this is form"}
+ if request.method == 'POST':
+        new_form=forms.user_form(request.POST)
+        diction.update({'test_form':new_form})
+
+        if new_form.is_valid():
+            user_nam=new_form.cleaned_data['user_name']
+            user_do=new_form.cleaned_data['user_dob']
+            user_emai=new_form.cleaned_data['user_email']
+
+            diction.update({'user_n':user_nam})
+            diction.update({'user_d':user_do})
+            diction.update({'user_e':user_emai})
+            diction.update({'form_submit':'yes'})
+            diction.update({'boolean_field':new_form.cleaned_data['boolean_field']})
+            diction.update({'choice_field':new_form.cleaned_data['choice_field']})
+            diction.update({'Radio_field':new_form.cleaned_data['Radio_field']})
+
+
+
+########### form.html   ##########
+<hr>
+ <h3>{{heading_3}}</h3>
+        <form  method="POST">
+        {% csrf_token %}
+        {{test_form.as_p}}
+        <input type="submit" name="submit" value="Submit">
+        
+        </form>
+        
+        {% if form_submit %}
+       
+         <p> Name: {{user_n}}</p>
+         <p>Date of Birth:{{user_d}}</p>
+         <p> Email:{{user_e}}</p>
+         <p>boolean_field:{{boolean_field}}</p>
+         <p>choice_field:{{choice_field}}</p>
+         <p>Radio_field:{{Radio_field}}</p>
+
+        {% endif %}
+
+######### forms.py #######
+from typing import Any, Dict
+from django import forms
+from django.core import validators
+from Mapps import models
+
+class user_form(forms.Form):
+    user_name=forms.CharField(max_length=20,required=False,
+    label="Full Name",widget=forms.TextInput(
+    attrs={'placeholder':"Enter your full name",'style':'width:170px'}))
+
+    user_dob=forms.DateField(required=False,label="Date Field",
+    widget=forms.TextInput(attrs={'type':'date'}))
+
+    user_email=forms.EmailField(required=False,label="User Email",
+    widget=forms.TextInput(attrs={'placeholder':"User your email"}))
+    boolean_field=forms.BooleanField(required=False)
+    rating=(
+        (' ', "---Select---"),
+        ('1','First'),
+        ('2',"Second"),
+        ('3',"third"),
+        ('4',"four"),
+
+    )
+    choice_field=forms.MultipleChoiceField(required=False,choices=rating)
+    radiocheckbox=(
+        ("A","B"),
+        ("B","B"),
+        ("C","C"),
+        ("D","D"),
+    )
+    Radio_field=forms.MultipleChoiceField(choices=radiocheckbox,required=False,widget=forms.CheckboxSelectMultiple)
+    #Radio_field=forms.ChoiceField(choices=radiocheckbox,required=False, widget=forms.RadioSelect)
+    First_mail=forms.EmailField()
+    Second_mail=forms.EmailField()
+
+    def clean(self):
+        all_clean_data=super().clean()
+        First_mail=all_clean_data['First_mail']
+        Second_mail=all_clean_data['Second_mail']
+
+        if First_mail != Second_mail:
+            raise forms.ValidationError("Fields Don't Match !!")
+
+
+
+
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
